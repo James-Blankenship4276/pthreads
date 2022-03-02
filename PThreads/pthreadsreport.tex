@@ -1,0 +1,51 @@
+\documentclass[12pt,letterpaper,notitlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{textgreek}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\title{Pthread Report}
+\author{James Blankenship}
+
+
+
+\begin{document}
+\maketitle
+\section{Time}
+\subsection{no locks}
+\begin{itemize}
+    \item default time .360 counter: 39999
+    \item  2 200000 time:  3.706 counter:399832
+    \item 10 200000 time; 27.887 counter:1999999
+    \item 4 40000 time: 1.487 counter: 159999
+    \item  4 800000 time: 47.423 counter:3199869
+\end{itemize}
+\subsection{pthread locks }
+\begin{itemize}
+    \item default time: .363 counter:39999
+    \item  2 200000 time:  3.771 counter:399930
+    \item 10 200000 time: 29.083 counter:19999422
+    \item  4 40000 time: 1.518 counter:159999
+    \item 4 800000 time: 46.744 counter:3199999
+\end{itemize}
+\subsection{TAS}
+\begin{itemize}
+    \item default time: .341 counter: 39999
+    \item 2 200000 time: 2.958 counter:399999
+    \item  10 200000 time: 28.179 counter:1999948
+    \item 4 40000 time: 1.334 counter: 159999
+    \item  4 800000 time: 47.173 counter: 3199999
+\end{itemize}
+\subsection{TATAS}
+\begin{itemize}
+    \item default time: 1.330 counter: 39999
+    \item  2 200000 time:3.900 counter: 399999
+    \item 10 200000 time:27.190 counter: 1999999
+    \item   4 40000 time 2.317 counter: 159999
+    \item 4 800000 time: 48.490: counter 3199999
+\end{itemize}
+
+\section{Analysis}
+Pthreads seem to be the best time wise overall,followed by TAS.No Locks and TATAS did the worst.I did runs of default runs, and  low thread low runs.I also did low thread high runs.I also did higher threads with low and high runs.
+\end{document}
